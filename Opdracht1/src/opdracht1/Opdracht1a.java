@@ -62,6 +62,16 @@ public class Opdracht1a {
         System.out.println("There are " + BottomHalf(world) + " objects in the "
                          + "bottom half of the world.");
         
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.b");
+        for(int i = 0; i < maxY; i++) {
+            System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
+        }
+        
+
+       
         
     }
     
@@ -88,6 +98,15 @@ public class Opdracht1a {
             }
         }
         
+        return count;
+    }
+    
+    public static int RowCount(int[][] world, int row) {
+        int maxX = world.length;
+        int count = 0;
+        for(int x = 0; x < maxX; x++) {
+            count += world[x][row];
+        }
         return count;
     }
 }
