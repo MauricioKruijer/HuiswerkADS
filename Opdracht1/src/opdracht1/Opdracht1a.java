@@ -1,16 +1,23 @@
 package opdracht1;
 
-/*
- * Schrijf een programma dat deze array bijhoudt en vult met 50 objecten met 
- * willekeurige x en y waardes. Zorg er voor dat je de maximale x en y waardes 
- * en het aantal te genereren objecten als parameters op kan geven.
- */
 import java.io.*;
 import java.util.*;
 
+/**
+ * Schrijf een programma dat deze array bijhoudt en vult met 50 objecten met 
+ * willekeurige x en y waardes. Zorg er voor dat je de maximale x en y waardes 
+ * en het aantal te genereren objecten als parameters op kan geven.
+ * @author Jeff
+ */
 public class Opdracht1a {
 
-    public static void main(String[] args) throws IOException {        
+    /**
+     * Main method, does everything and calls from Methods.java
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException { 
+       
         System.out.println("Max X?");
         int maxX = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
         
@@ -48,5 +55,39 @@ public class Opdracht1a {
         double chance = ((double)counter / (double)total) * 100.0;
         System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
         
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.a");
+        System.out.println("There are " + BottomHalf(world) + " objects in the "
+                         + "bottom half of the world.");
+        
+        
+    }
+    
+    /**
+     *
+     * @param world
+     * @return the number of objects beneath the middle-y value
+     */
+    public static int BottomHalf(int[][] world) {
+        // Method to check the bottom half of the world
+        // Returns the number of objects beneath the middle-y value
+        int count = 0;
+        
+        int maxX = world.length;
+        int maxY = world[0].length;
+        
+        // Get the middle line
+        int middle = maxY / 2;
+        System.out.println("MaxY: " + maxY + ", so middle: " + middle);
+        
+        for(int x = 0; x < maxX; x++) {
+            for(int y = middle; y < maxY; y++) {
+                count += world[x][y];
+            }
+        }
+        
+        return count;
     }
 }
