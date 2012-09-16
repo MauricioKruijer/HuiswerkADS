@@ -89,6 +89,13 @@ public class Opdracht1a {
             System.out.println("Row " + (i+1) + "'s first tile with at least one object: " + GetFirstFilledTile(world, i));
         }
         
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.f [BONUSVRAAG]");
+        System.out.println("Longest joined sequence of tiles: " + LongestTileRow(world));
+
+        
     }
     
     /**
@@ -159,5 +166,35 @@ public class Opdracht1a {
             return -1;
         
         return x;
+    }
+    
+    public static int LongestTileRow(int[][] world) {        
+        int maxX = world.length;
+        int maxY = world[0].length;
+        
+        int[] rowMax = new int[maxY];
+        
+        for(int y = 0; y < maxY; y++) {
+            // rows
+            int count = 0;
+            int lastMax = 0;
+            for(int x = 0; x < maxX; x++) {
+                // columns
+                if(world[x][y] != 0) {
+                    count++;
+                } else {
+                    if(count > lastMax) {
+                        lastMax = count;
+                    }
+                    count = 0;
+                }
+            }
+            
+            rowMax[y] = lastMax;
+        }
+        
+        Arrays.sort(rowMax);
+        
+        return rowMax[maxY - 1];
     }
 }
