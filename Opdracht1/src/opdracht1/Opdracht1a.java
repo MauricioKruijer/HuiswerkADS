@@ -81,7 +81,13 @@ public class Opdracht1a {
         System.out.println("1B.d");
         System.out.println("There are " + CountEmpty(world) + " empty tiles");
         
-        
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.e");
+        for(int i = 0; i < maxY; i++) {
+            System.out.println("Row " + (i+1) + "'s first tile with at least one object: " + GetFirstFilledTile(world, i));
+        }
         
     }
     
@@ -134,5 +140,24 @@ public class Opdracht1a {
             }
         }
         return count;
+    }
+    
+    public static int GetFirstFilledTile(int[][] world, int row) {
+        int maxX = world.length;
+        int x = 0;
+        boolean found = false;
+        
+        while(x < maxX && found == false) {
+            if(world[x][row] != 0) {
+                found = true;
+            } else {
+                x++;
+            }
+        }
+        
+        if(found == false)
+            return -1;
+        
+        return x;
     }
 }
