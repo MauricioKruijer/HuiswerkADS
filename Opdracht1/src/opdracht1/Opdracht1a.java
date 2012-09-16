@@ -50,11 +50,6 @@ public class Opdracht1a {
             }
         }
         
-        System.out.println(counter + " out of " + (maxX*maxY) + " are >= 2");
-        int total = maxX * maxY;
-        double chance = ((double)counter / (double)total) * 100.0;
-        System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
-        
         System.out.println("");
         System.out.println("-==============================-");
         System.out.println("");
@@ -70,8 +65,23 @@ public class Opdracht1a {
             System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
         }
         
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.c");
+        
+        System.out.println(counter + " out of " + (maxX*maxY) + " are >= 2");
+        int total = maxX * maxY;
+        double chance = ((double)counter / (double)total) * 100.0;
+        System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
 
-       
+        System.out.println("");
+        System.out.println("-==============================-");
+        System.out.println("");
+        System.out.println("1B.d");
+        System.out.println("There are " + CountEmpty(world) + " empty tiles");
+        
+        
         
     }
     
@@ -106,6 +116,22 @@ public class Opdracht1a {
         int count = 0;
         for(int x = 0; x < maxX; x++) {
             count += world[x][row];
+        }
+        return count;
+    }
+    
+    public static int CountEmpty(int[][] world) {
+        int count = 0;
+        
+        int maxX = world.length;
+        int maxY = world[0].length;
+        
+        for(int x = 0; x < maxX; x++) {
+            for(int y = 0; y < maxY; y++) {
+                if(world[x][y] == 0) {
+                    count++;
+                }
+            }
         }
         return count;
     }
