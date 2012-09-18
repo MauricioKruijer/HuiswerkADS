@@ -56,14 +56,13 @@ public class Opdracht1a {
                         }
                     }
                 }
-
        BottomHalf(world);
         for(int i = 0; i < maxY; i++) {
             RowCount(world, i);
         }        
        
         System.out.println(EndTime() + "ms for " + numObj + " objects in " + maxX + "x" + maxY + " (" + firsttime + "ms for creation)");
-        }
+       }
             
       
         
@@ -77,21 +76,13 @@ public class Opdracht1a {
     public static int BottomHalf(int[][] world) {
         // Method to check the bottom half of the world
         // Returns the number of objects beneath the middle-y value
-        int count = 0;
-        
-        int maxX = world.length;
-        int maxY = world[0].length;
-        
-        // Get the middle line
+        int count = 0, maxX = world.length, maxY = world[0].length;
         int middle = maxY / 2;
         System.out.println("MaxY: " + maxY + ", so middle: " + middle);
-        
         for(int x = 0; x < maxX; x++) {
-            for(int y = middle; y < maxY; y++) {
+            for(int y = middle; y < maxY; y++)
                 count += world[x][y];
-            }
         }
-        
         return count;
     }
     
