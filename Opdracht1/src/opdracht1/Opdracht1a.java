@@ -30,77 +30,44 @@ public class Opdracht1a {
         System.out.println("How many objects?");
         int numObj = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
         
+        
+        
         // Fill world with numObj objects
         Random random = new Random();
         int randomX;
         int randomY;
-        for(int i = 0; i < numObj; i++) {
-            randomX = random.nextInt(maxX);
-            randomY = random.nextInt(maxY);
-            world[randomX][randomY]++;
-        }
-        
-        // Now check how many cells have 2 OR MORE
         int counter = 0;
-        for(int x = 0; x < maxX; x++) {
-            for(int y = 0; y < maxY; y++) {
-                if(world[x][y] >= 2) {
-                    counter++;
+        int firsttime = 0;
+        
+        BeginTime();
+                for(int i = 0; i < numObj; i++) {
+                    randomX = random.nextInt(maxX);
+                    randomY = random.nextInt(maxY);
+                    world[randomX][randomY]++;
                 }
-            }
-        }
-        
-        PrintWorld(world);
-        if(true)
-            return;
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.a");
-        System.out.println("There are " + BottomHalf(world) + " objects in the "
-                         + "bottom half of the world.");
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.b");
-        for(int i = 0; i < maxY; i++) {
-            System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
-        }
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.c");
-        
-        System.out.println(counter + " out of " + (maxX*maxY) + " are >= 2");
-        int total = maxX * maxY;
-        double chance = ((double)counter / (double)total) * 100.0;
-        System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
+         firsttime = EndTime();
 
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.d");
-        System.out.println("There are " + CountEmpty(world) + " empty tiles");
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.e");
-        for(int i = 0; i < maxY; i++) {
-            System.out.println("Row " + (i+1) + "'s first tile with at least one object: " + GetFirstFilledTile(world, i));
-        }
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.f [BONUSVRAAG]");
-        System.out.println("Longest joined sequence of tiles: " + LongestTileRow(world));
+    BeginTime();
+ // check how many cells have 2 OR MORE
+                for(int x = 0; x < maxX; x++) {
+                    for(int y = 0; y < maxY; y++) {
+                        if(world[x][y] >= 2) {
+                            counter++;
+                        }
+                    }
+                }
 
+       BottomHalf(world);
+        for(int i = 0; i < maxY; i++) {
+            RowCount(world, i);
+        }        
+       
+        System.out.println(EndTime() + "ms for " + numObj + " objects in " + maxX + "x" + maxY + " (" + firsttime + "ms for creation)");
+        }
+            
+      
         
-    }
+    
     
     /**
      *
@@ -128,9 +95,22 @@ public class Opdracht1a {
         return count;
     }
     
+    //public static timerBegin
+    public static long beginMillis;
+    public static void BeginTime() {
+        beginMillis = System.currentTimeMillis();
+    }
+    
+    public static int EndTime() {
+        int difference;
+        difference = (int) (System.currentTimeMillis() - beginMillis);
+        return difference;
+    }
+    
     public static void PrintWorld(int[][] world) {
         int maxX = world.length;
         int maxY = world[0].length;
+        
         
         for(int y = 0; y < maxY; y++) {
             for(int x = 0; x < maxX; x++) {
