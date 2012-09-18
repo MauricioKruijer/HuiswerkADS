@@ -50,6 +50,10 @@ public class Opdracht1a {
             }
         }
         
+        PrintWorld(world);
+        if(true)
+            return;
+        
         System.out.println("");
         System.out.println("-==============================-");
         System.out.println("");
@@ -122,6 +126,19 @@ public class Opdracht1a {
         }
         
         return count;
+    }
+    
+    public static void PrintWorld(int[][] world) {
+        int maxX = world.length;
+        int maxY = world[0].length;
+        
+        for(int y = 0; y < maxY; y++) {
+            for(int x = 0; x < maxX; x++) {
+                System.out.print(world[x][y] + " ");
+            }
+            System.out.println("");
+        }
+        
     }
     
     public static int RowCount(int[][] world, int row) {
