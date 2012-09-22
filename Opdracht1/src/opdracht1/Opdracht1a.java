@@ -25,77 +25,99 @@ public class Opdracht1a {
         int maxY = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
         
         // Make array with maxX and maxY
-        int[][] world = new int[maxX][maxY];
+        
         
         System.out.println("How many objects?");
         int numObj = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
+        //System.out.println("1000000");
+        //int numObj = 1000000;
         
-        // Fill world with numObj objects
-        Random random = new Random();
-        int randomX;
-        int randomY;
-        for(int i = 0; i < numObj; i++) {
-            randomX = random.nextInt(maxX);
-            randomY = random.nextInt(maxY);
-            world[randomX][randomY]++;
-        }
-        
-        // Now check how many cells have 2 OR MORE
-        int counter = 0;
-        for(int x = 0; x < maxX; x++) {
-            for(int y = 0; y < maxY; y++) {
-                if(world[x][y] >= 2) {
-                    counter++;
+        for(int mult = 8; mult < 18; mult++) {
+        int bottomhalfcounter = 0;
+        for(int c = 0; c < 3; c++) {
+
+            maxX = (int) (Math.pow((double) 2, (double) mult) * 100);
+            int[][] world = new int[maxX][maxY];
+            
+            // Fill world with numObj objects
+            Random random = new Random();
+            int randomX;
+            int randomY;
+            for(int i = 0; i < numObj; i++) {
+                randomX = random.nextInt(maxX);
+                randomY = random.nextInt(maxY);
+                world[randomX][randomY]++;
+            }
+            //System.out.println("WorldGen took " +  + "ms");
+            
+
+            // Now check how many cells have 2 OR MORE
+            int counter = 0;
+            for(int x = 0; x < maxX; x++) {
+                for(int y = 0; y < maxY; y++) {
+                    if(world[x][y] >= 2) {
+                        counter++;
+                    }
                 }
             }
-        }
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.a");
-        System.out.println("There are " + BottomHalf(world) + " objects in the "
-                         + "bottom half of the world.");
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.b");
-        for(int i = 0; i < maxY; i++) {
-            System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
-        }
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.c");
-        
-        System.out.println(counter + " out of " + (maxX*maxY) + " are >= 2");
-        int total = maxX * maxY;
-        double chance = ((double)counter / (double)total) * 100.0;
-        System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
+            
 
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.d");
-        System.out.println("There are " + CountEmpty(world) + " empty tiles");
-        
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.e");
-        for(int i = 0; i < maxY; i++) {
-            System.out.println("Row " + (i+1) + "'s first tile with at least one object: " + GetFirstFilledTile(world, i));
+            //System.out.println("There are " + BottomHalf(world) + " objects in the "
+              //               + "bottom half of the world.");
+            
+            
+            
+
+            
+            //for(int i = 0; i < maxY; i++) {
+            //    System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
+            //}
+            
+            
+            
+            
+/*
+            System.out.println(counter + " out of " + (maxX*maxY) + " are >= 2");
+            int total = maxX * maxY;
+            double chance = ((double)counter / (double)total) * 100.0;
+            System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
+            gcounter += counter;
+
+*/
+            BeginTime();
+            //System.out.println("There are " + CountEmpty(world) + " empty tiles");
+            CountEmpty(world);
+            bottomhalfcounter += EndTime();
+            /*
+            for(int i = 0; i < maxY; i++) {
+                System.out.println("Row " + (i+1) + "'s first tile with at least one object: " + GetFirstFilledTile(world, i));
+            }
+            
+            
+/**/
+           // System.out.println("Longest joined sequence of tiles: " + LongestTileRow(world));
+    
+            /**/
         }
         
-        System.out.println("");
-        System.out.println("-==============================-");
-        System.out.println("");
-        System.out.println("1B.f [BONUSVRAAG]");
-        System.out.println("Longest joined sequence of tiles: " + LongestTileRow(world));
-
         
+        
+            bottomhalfcounter = bottomhalfcounter / 6;
+            System.out.println("Time: " + bottomhalfcounter + "ms (" + maxX + "x" + maxY + ", " + numObj + ")");
+            //System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
+        }   
+    }
+    
+    
+    public static long beginMillis;
+    public static void BeginTime() {
+        beginMillis = System.currentTimeMillis();
+    }
+    
+    public static int EndTime() {
+        int difference;
+        difference = (int) (System.currentTimeMillis() - beginMillis);
+        return difference;
     }
     
     /**
@@ -106,7 +128,7 @@ public class Opdracht1a {
     public static int BottomHalf(int[][] world) {
         // Method to check the bottom half of the world
         // Returns the number of objects beneath the middle-y value
-        int count = 0;
+        int countt = 0;
         
         int maxX = world.length;
         int maxY = world[0].length;
@@ -117,11 +139,11 @@ public class Opdracht1a {
         
         for(int x = 0; x < maxX; x++) {
             for(int y = middle; y < maxY; y++) {
-                count += world[x][y];
+                countt += world[x][y];
             }
         }
         
-        return count;
+        return countt;
     }
     
     public static int RowCount(int[][] world, int row) {
@@ -131,6 +153,7 @@ public class Opdracht1a {
             count += world[x][row];
         }
         return count;
+
     }
     
     public static int CountEmpty(int[][] world) {
