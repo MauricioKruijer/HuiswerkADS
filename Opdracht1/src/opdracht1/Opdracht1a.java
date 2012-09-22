@@ -63,7 +63,7 @@ public class Opdracht1a {
             
 
             //System.out.println("There are " + BottomHalf(world) + " objects in the "
-              //               + "bottom half of the world.");
+              //               + "bottom half of the world."); asf
             
             
             
