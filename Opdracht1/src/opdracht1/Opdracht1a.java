@@ -34,10 +34,14 @@ public class Opdracht1a {
         
         for(int mult = 8; mult < 18; mult++) {
         int bottomhalfcounter = 0;
+        int WorldGenTime = 0;
         for(int c = 0; c < 3; c++) {
 
             maxX = (int) (Math.pow((double) 2, (double) mult) * 100);
+            
+            BeginTime();
             int[][] world = new int[maxX][maxY];
+            
             
             // Fill world with numObj objects
             Random random = new Random();
@@ -48,10 +52,12 @@ public class Opdracht1a {
                 randomY = random.nextInt(maxY);
                 world[randomX][randomY]++;
             }
-            //System.out.println("WorldGen took " +  + "ms");
+            //System.out.print("WorldGen took " + EndTime() + "ms | ");
+            WorldGenTime += EndTime();
             
 
             // Now check how many cells have 2 OR MORE
+            /*
             int counter = 0;
             for(int x = 0; x < maxX; x++) {
                 for(int y = 0; y < maxY; y++) {
@@ -60,6 +66,7 @@ public class Opdracht1a {
                     }
                 }
             }
+            */
             
 
             //System.out.println("There are " + BottomHalf(world) + " objects in the "
@@ -69,9 +76,7 @@ public class Opdracht1a {
             
 
             
-            //for(int i = 0; i < maxY; i++) {
-            //    System.out.println("Row " + (i+1) + " has " + RowCount(world, i) + " objects.");
-            //}
+
             
             
             
@@ -86,7 +91,22 @@ public class Opdracht1a {
 */
             BeginTime();
             //System.out.println("There are " + CountEmpty(world) + " empty tiles");
-            CountEmpty(world);
+            
+            //CountEmpty(world);
+            
+            //for(int i = 0; i < maxY; i++) {
+            //    RowCount(world, i);
+            //}
+            
+            //BottomHalf(world);
+            
+            //CountEmpty(world);
+            
+            //for(int i = 0; i < maxY; i++)
+            //    GetFirstFilledTile(world, i);
+            
+            LongestTileRow(world);
+            
             bottomhalfcounter += EndTime();
             /*
             for(int i = 0; i < maxY; i++) {
@@ -102,7 +122,8 @@ public class Opdracht1a {
         
         
         
-            bottomhalfcounter = bottomhalfcounter / 6;
+            bottomhalfcounter = bottomhalfcounter / 3;
+            
             System.out.println("Time: " + bottomhalfcounter + "ms (" + maxX + "x" + maxY + ", " + numObj + ")");
             //System.out.println("That makes a chance of: " + chance + "% (sorry about the comma)");
         }   
@@ -135,7 +156,7 @@ public class Opdracht1a {
         
         // Get the middle line
         int middle = maxY / 2;
-        System.out.println("MaxY: " + maxY + ", so middle: " + middle);
+        //System.out.println("MaxY: " + maxY + ", so middle: " + middle);
         
         for(int x = 0; x < maxX; x++) {
             for(int y = middle; y < maxY; y++) {
